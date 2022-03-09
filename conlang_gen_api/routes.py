@@ -118,5 +118,14 @@ def generate_new():
         for column_name, phoneme in palatals.items():
             create_articulation_dict(column_name, phoneme.to_dict(), phonemes)
 
+    r = random()
+    if r < 0.9:  # this is an arbitrary number that *feels* right
+        velars = pd.merge(
+            get_phonemes_with_features("dor", "+", features), get_phonemes_with_features("hgt", "+", features)
+        )
+        print(velars)
+        for column_name, phoneme in velars.items():
+            create_articulation_dict(column_name, phoneme.to_dict(), phonemes)
+
     clean_phonemes(phonemes, features)
     return jsonify(phonemes)
